@@ -8,7 +8,7 @@ const request = "https://api.hgbrasil.com/finance?format=json-cors&key=69e365e3"
 
 void main() async {
 
-  print(await getData());
+  await getData(); // executa a requisição
 
   runApp(
     MaterialApp(
@@ -24,11 +24,11 @@ void main() async {
   );
 }
 
+// Função para realizar o request da API
 Future<Map> getData() async {
   http.Response response = await http.get(request);
   return json.decode(response.body);
 }
-
 
 class Home extends StatefulWidget {
   @override
@@ -98,7 +98,7 @@ class _HomeState extends State<Home> {
               return Center(
                 child: Text("Carregando dados...",
                 style: TextStyle(color: Colors.amber,
-                fontSize: 25.0),
+                fontSize: 16.0),
                 textAlign: TextAlign.center,)
               );
             default:
@@ -106,7 +106,7 @@ class _HomeState extends State<Home> {
                 return Center(
                     child: Text("Erro ao carregar dados :-(",
                       style: TextStyle(color: Colors.amber,
-                          fontSize: 25.0),
+                          fontSize: 16.0),
                       textAlign: TextAlign.center,)
                 );
               } else {
@@ -115,7 +115,7 @@ class _HomeState extends State<Home> {
                 euro = snapshot.data["results"]["currencies"]["EUR"]["buy"];
 
                 return SingleChildScrollView(
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(11.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
@@ -136,6 +136,7 @@ class _HomeState extends State<Home> {
   }
 }
 
+// Função para criar os Widget dos inputs
 Widget buildTextField(String label, String prefix, TextEditingController c, Function f){
   return TextField(
     controller: c,
@@ -147,7 +148,7 @@ Widget buildTextField(String label, String prefix, TextEditingController c, Func
     ),
     style: TextStyle(
         color: Colors.amber,
-        fontSize: 18.0
+        fontSize: 16.0
     ),
     onChanged: f,
     keyboardType: TextInputType.numberWithOptions(decimal: true),
