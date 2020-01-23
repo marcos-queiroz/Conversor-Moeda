@@ -14,10 +14,10 @@ void main() async {
     MaterialApp(
       home: Home(),
       theme: ThemeData(
-        hintColor: Colors.amber,
+        // hintColor: Colors.amber,
         primaryColor: Colors.white,
         inputDecorationTheme: InputDecorationTheme(
-          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white))
+          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.amber))
         )
       )
     ),
@@ -83,7 +83,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("\$ Conversor \$"),
         backgroundColor: Colors.amber,
@@ -96,20 +96,28 @@ class _HomeState extends State<Home> {
             case ConnectionState.none:
             case ConnectionState.waiting:
               return Center(
-                child: Text("Carregando dados...",
-                style: TextStyle(color: Colors.amber,
-                fontSize: 16.0),
-                textAlign: TextAlign.center,)
+                child: Text(
+                  "Carregando dados...",
+                  style: TextStyle(
+                    // color: Colors.amber,
+                    fontSize: 16.0
+                  ),
+                  textAlign: TextAlign.center,
+                )
               );
             default:
               if(snapshot.hasError){
                 return Center(
                     child: Text("Erro ao carregar dados :-(",
-                      style: TextStyle(color: Colors.amber,
-                          fontSize: 16.0),
-                      textAlign: TextAlign.center,)
+                      style: TextStyle(
+                        //color: Colors.amber,
+                        // fontSize: 16.0
+                      ),
+                      textAlign: TextAlign.center,
+                    )
                 );
               } else {
+
                 // carrega o valor das moedas
                 dolar = snapshot.data["results"]["currencies"]["USD"]["buy"];
                 euro = snapshot.data["results"]["currencies"]["EUR"]["buy"];
@@ -120,11 +128,11 @@ class _HomeState extends State<Home> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Icon(Icons.monetization_on, size: 110.0, color: Colors.amber),
-                      buildTextField("Reais", "R\$", realController, _realChange),
+                      buildTextField("Reais", "R\$ ", realController, _realChange),
                       Divider(),
-                      buildTextField("Dólares", "US\$", dolarController, _dolarChange),
+                      buildTextField("Dólares", "US\$ ", dolarController, _dolarChange),
                       Divider(),
-                      buildTextField("Euros", "€", euroController, _euroChange),
+                      buildTextField("Euros", "€ ", euroController, _euroChange),
                     ],
                   ),
                 );
@@ -142,12 +150,12 @@ Widget buildTextField(String label, String prefix, TextEditingController c, Func
     controller: c,
     decoration: InputDecoration(
       labelText: label,
-      labelStyle: TextStyle(color: Colors.amber),
+      // labelStyle: TextStyle(color: Colors.amber),
       border: OutlineInputBorder(),
       prefixText: prefix,
     ),
     style: TextStyle(
-        color: Colors.amber,
+        // color: Colors.amber,
         fontSize: 16.0
     ),
     onChanged: f,
